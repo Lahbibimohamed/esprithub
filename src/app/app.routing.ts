@@ -8,10 +8,12 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
-
+import { UsersComponent } from './views/users/users.component';
+import {AuthGuard} from "../app/guards/auth.guard"
 export const routes: Routes = [
   {
-    path: '',
+    path: 'adminpage',
+
     redirectTo: 'dashboard',
     pathMatch: 'full',
   },
@@ -43,6 +45,7 @@ export const routes: Routes = [
       title: 'Register Page'
     }
   },
+
   {
     path: '',
     component: DefaultLayoutComponent,
@@ -75,6 +78,7 @@ export const routes: Routes = [
         loadChildren: () => import('./views/notifications/notifications.module').then(m => m.NotificationsModule)
       },
       {
+
         path: 'theme',
         loadChildren: () => import('./views/theme/theme.module').then(m => m.ThemeModule)
       },

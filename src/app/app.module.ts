@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-
+import {AuthInterceptorInterceptor} from "src/app/interceptors/auth-interceptor.interceptor"
 import { IconModule, IconSetModule, IconSetService } from '@coreui/icons-angular';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -42,8 +42,14 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
-import {HttpClientModule} from "@angular/common/http";
-
+import {HttpClientModule , HTTP_INTERCEPTORS} from "@angular/common/http";
+import { FormsModule } from '@angular/forms';
+import { UsersComponent } from './views/users/users.component';
+import { UsersServicesService } from './Service/users-services.service';
+import { SingleUserComponent } from './views/users/single-user/single-user.component';
+import { ProfilComponent } from './views/profil/profil.component';
+import { OptionsComponent } from './views/options/options.component';
+import { AddOptionComponent } from './views/options/add-option/add-option.component';
 @NgModule({
   imports: [
     BrowserModule,
@@ -60,7 +66,8 @@ import {HttpClientModule} from "@angular/common/http";
     ChartsModule,
     IconModule,
     IconSetModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   declarations: [
     AppComponent,
@@ -68,14 +75,23 @@ import {HttpClientModule} from "@angular/common/http";
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    UsersComponent,
+    SingleUserComponent,
+    ProfilComponent,
+    OptionsComponent,
+    AddOptionComponent,
+
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorInterceptor, multi: true },
+
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
     },
     IconSetService,
+    UsersServicesService
   ],
   bootstrap: [ AppComponent ]
 })
