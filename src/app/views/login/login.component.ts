@@ -11,7 +11,7 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 export class LoginComponent implements OnInit{
   user:User;
   error:string="Invalid email or password";
-  navigate:boolean=true;
+  hidden_div:boolean=true;
   helper = new JwtHelperService();
   decodedToken: any;
   constructor(private loginUser:AuthService , private router : Router ) {
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit{
           {
             if(this.loginUser.getRole()=="user not found"){
               localStorage.removeItem("token")
-              this.navigate=false;
+              this.hidden_div=false;
               this.router.navigate(["/login"])}
             if (this.loginUser.getRole()=="admin"){
               this.router.navigate(["/dashboard"])}

@@ -3,7 +3,7 @@ import { Option } from 'src/app/Entities/options';
 import { OptionsService } from 'src/app/Service/options.service';
 import { Router } from '@angular/router';
 
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-add-option',
   templateUrl: './add-option.component.html',
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AddOptionComponent implements OnInit {
   option:Option;
-    constructor(private optionsService:OptionsService ,private router : Router) {
+    constructor(private optionsService:OptionsService ,private router : Router,private toastr: ToastrService) {
       this.option= new Option() ;
     }
 
@@ -20,6 +20,8 @@ export class AddOptionComponent implements OnInit {
   save(){
     this.optionsService.saveOption(this.option).subscribe()
     this.router.navigate(["/theme/options"]);
+    this.toastr.success("Option added Successfully");
+
 
   }
 

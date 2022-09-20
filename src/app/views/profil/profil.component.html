@@ -2,18 +2,21 @@
   <h1 style="text-align: center;">loading . ..</h1>
 </div>
 <div class=" rounded bg-white mt-5 mb-5">
+
   <div class="row">
+
       <div class="col-md-3 border-right">
+        <div class="d-flex flex-column align-items-center text-center p-3 py-2"><h4>Photo de profil</h4></div>
+
           <div class="d-flex flex-column align-items-center text-center p-3 py-2"><img  width="250px" src={{user.image}} ></div>
           <div class="d-flex flex-column align-items-center text-center p-3 py-2"><input  type="file" (change)="onfilselected($event)"></div>
           <div class="d-flex flex-column align-items-center text-center p-3 py-2"><button class="btn btn-primary" (click)="changePhoto()">Change Photo </button></div>
 
       </div>
       <div class="col-md-5 border-right">
-          <div class="p-3 py-5">
-              <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4 class="text-right">Profile info</h4>
-              </div>
+          <div >
+
+            <div class="d-flex flex-column align-items-center text-center p-3 py-2"><h4>Profil Information</h4></div>
 
               <div class="row mt-3">
                 <div class="col-md-12 py-1"><label class="labels">First name </label><input type="text" class="form-control"   [(ngModel)]="user.firstName"  value={{user.firstName}}></div>
@@ -54,7 +57,13 @@
 -->
 
                   <div class="col-md-12  py-1"><label class="labels">about me </label><textarea type="text" class="form-control"   [(ngModel)]="user.aboutMe" value={{user.aboutMe}}></textarea></div>
-                  <div class="col-md-12  py-1"><label class="labels">role</label><input type="text" class="form-control"   disabled [(ngModel)]="user.role" value={{user.role}}></div>
+
+
+                  <div class="col-md-12  py-1"
+                  ><label class="labels">role</label> <span style="cursor: pointer;"   data-toggle="modal" (click)="primaryModal.show()"  ><i class="icon-info"></i></span> <br>
+
+
+                    <input type="text" class="form-control"   disabled [(ngModel)]="user.role" value={{user.role}}> </div>
 
                 </div>
               <div class="mt-5 text-center"><button class="btn btn-primary profile-button"   (click)="updateprofil()" type="button">Update</button></div>
@@ -65,13 +74,34 @@
 
           <div class="p-3 py-1">
             <div class="d-flex justify-content-between align-items-center mb-3">
-              <h4 class="text-right">mdp</h4>
+              <h4 class="text-right">Change Password</h4>
           </div>
           <div>
-          <input type="text" class="form-control" value={{user.password}} disabled></div>
+            <div class="col-md-12  py-1"><label class="labels">Old password </label><input type="password" placeholder="Type Old password" class="form-control"   [(ngModel)]="oldpassword" ></div>
+            <div class="col-md-12  py-1"><label class="labels">New password </label><input type="password" placeholder="Type new password" class="form-control"  [(ngModel)]="newPassword" ></div>
             </div>
+            <div class="mt-5 text-center"><button class="btn btn-primary profile-button"   (click)="changepassword()" type="button">Update Password</button></div>
+
     </div>
   </div>
 </div>
 
 
+<div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-primary" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Role Change</h4>
+        <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>To change your role to teacher please send us an email at <strong>EspritHub99@gmail.com </strong>with your teacher card</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

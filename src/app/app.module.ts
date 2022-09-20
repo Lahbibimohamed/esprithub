@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
@@ -22,6 +23,7 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
+import { ToastrModule } from 'ngx-toastr';
 
 const APP_CONTAINERS = [
   DefaultLayoutComponent
@@ -50,6 +52,8 @@ import { SingleUserComponent } from './views/users/single-user/single-user.compo
 import { ProfilComponent } from './views/profil/profil.component';
 import { OptionsComponent } from './views/options/options.component';
 import { AddOptionComponent } from './views/options/add-option/add-option.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -67,7 +71,11 @@ import { AddOptionComponent } from './views/options/add-option/add-option.compon
     IconModule,
     IconSetModule.forRoot(),
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ToastrModule.forRoot(), // ToastrModule added
+    Ng2SearchPipeModule,
+    ModalModule.forRoot()
+
   ],
   declarations: [
     AppComponent,

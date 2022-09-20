@@ -1,5 +1,6 @@
 <br>
 <br>
+
 <div class="container-fluid">
 <div class="col-lg-12">
   <div class="card">
@@ -7,7 +8,16 @@
       <h3 class="title"> Users Info</h3>
     </div>
     <div class="card-body">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="search for a user" [(ngModel)]="searchtext" aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <span class="input-group-text" id="basic-addon2"><i class="icon-magnifier
+            "></i></span>
+        </div>
+      </div>
+
       <table class="table table-bordered">
+
         <thead>
           <tr>
             <th scope="col">First name</th>
@@ -21,7 +31,7 @@
           </tr>
         </thead>
 
-        <tbody *ngFor="let u of listUser" >
+        <tbody *ngFor="let u of listUser |filter:searchtext" >
           <tr>
             <td>{{u.firstName}}</td>
             <td>{{u.lastName}}</td>

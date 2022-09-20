@@ -10,6 +10,8 @@ import { Observable } from 'rxjs';
 export class UsersServicesService {
   url : string = 'http://localhost:8080/user';
   fd:FormData;
+   queryParams = new HttpParams();
+
   constructor(private http: HttpClient) { }
   getUsers()
   {
@@ -40,15 +42,14 @@ export class UsersServicesService {
   }
   getinformations():Observable<User>{
     return this.http.get<User>(this.url+"/findByToken");
-
     }
 
   getrole(id:number){
     return this.http.get(this.url+"/managment/getrole/"+id);
 
   }
-  test(){
-    return this.http.get("http://localhost:8080/test/test",{responseType: 'text'});
+  countUser(){
+    return this.http.get(this.url+"/countUser");
   }
 
 

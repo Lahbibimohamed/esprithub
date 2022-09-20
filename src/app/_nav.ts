@@ -1,5 +1,6 @@
 import { INavData } from '@coreui/angular';
 import {AuthGuard} from "../app/guards/auth.guard"
+import {AuthService} from "src/app/Service/auth.service"
 
 export const navItems: INavData[] = [
   {

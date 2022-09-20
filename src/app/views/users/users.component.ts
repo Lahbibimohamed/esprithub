@@ -11,7 +11,8 @@ import { Router } from '@angular/router';
 })
 export class UsersComponent implements OnInit {
   listUser:User[];
-  aze:string;
+  searchtext:any;
+
 
   constructor(private userService:UsersServicesService , private route:Router) { }
 
@@ -30,12 +31,6 @@ export class UsersComponent implements OnInit {
     this.route.navigate(["theme/users/user/"+id])
   }
 
-  test(){
-   // console.log("test")
-    this.userService.test().subscribe(
-      (data:string) => this.aze=data
-    );
-    console.log(this.aze)
-  }
+
 
 }
