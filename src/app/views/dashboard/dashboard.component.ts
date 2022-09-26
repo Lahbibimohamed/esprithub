@@ -1,17 +1,78 @@
-import { Component, OnInit } from '@angular/core';
-import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
-import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
+import { Component, OnInit ,ViewChild} from '@angular/core';
 import { UsersServicesService } from 'src/app/Service/users-services.service';
+import { Chart } from 'chart.js';
+import { OptionsService } from 'src/app/Service/options.service';
+
 
 @Component({
   templateUrl: 'dashboard.component.html'
 })
-export class DashboardComponent implements OnInit {
-  userCount:any
-constructor(private userService:UsersServicesService){}
+export class DashboardComponent implements OnInit   {
+  userCount:any;
+  userCountbyDay:any;
+  Teachers:any;
+  users:any;
+  options:any;
+   chart: Chart;
+   messageSuccess:boolean=true;
+   userPerMonth : any[]=null;
+
+constructor(
+  private userService:UsersServicesService,
+  private optionService:OptionsService){}
   ngOnInit(): void {
-    // generate random values for mainChart
+
     this.userService.countUser().subscribe
     (data => this.userCount=data)
+    this.userService.countUserByDay().subscribe
+    (data => this.userCountbyDay=data)
+    this.userService.countUserRole().subscribe
+    (data => this.users=data)
+      this.userService.countTeacherRole().subscribe
+    (data => this.Teachers=data)
+
+    this.userService.getUserPerMonth().subscribe(
+    data=> this.userPerMonth=data)
+    this.optionService.CountOption().subscribe
+    (data => this.options=data)
+    console.log(this.messageSuccess)
+    /// bar chart
+    setTimeout(()=>{
+      this.chart = new Chart('canvas', {
+        type: 'bar',
+        data: {
+          labels: ['January', 'February', 'March', 'April', 'may', 'june','july','august','September' , 'October','November','December'],
+          datasets: [
+            {
+              label: 'Total user per Month',
+              data: [this.userPerMonth[0],this.userPerMonth[1],,this.userPerMonth[2]
+              ,this.userPerMonth[3],this.userPerMonth[4],this.userPerMonth[5],
+              this.userPerMonth[6],this.userPerMonth[7],
+              this.userPerMonth[8],this.userPerMonth[9],this.userPerMonth[10],this.userPerMonth[11],this.userPerMonth[12]],
+              backgroundColor: 'rgba(54, 162, 235, 0.2)',
+              borderColor: 'rgba(54, 162, 235, 1)',
+              borderWidth: 1,
+            },
+          ],
+        },
+      });}  , 1000);
+
   }
+
+
+ // Pie
+ public pieChartLabels:string[] = ["User","Teacher"];
+ public legend:string = 'pie';
+ public pieChartType:string = 'pie';
+ // events
+ public chartClicked(e:any):void {
+ }
+ public chartHovered(e:any):void {
+ }
+ //end pie
+
+
+
+
+
 }

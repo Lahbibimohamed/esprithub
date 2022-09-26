@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ViewChild} from '@angular/core';
 import { User } from 'src/app/Entities/user';
 import {UsersServicesService} from "src/app/Service/users-services.service";
 import { Router } from '@angular/router';
 
+import {ModalDirective} from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-users',
@@ -12,6 +13,7 @@ import { Router } from '@angular/router';
 export class UsersComponent implements OnInit {
   listUser:User[];
   searchtext:any;
+  @ViewChild('dangerModal') public dangerModal: ModalDirective;
 
 
   constructor(private userService:UsersServicesService , private route:Router) { }

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/Entities/user';
 import {UsersServicesService} from "src/app/Service/users-services.service";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-single-user',
@@ -15,7 +16,8 @@ export class SingleUserComponent implements OnInit {
 
 
 
-  constructor(private param:ActivatedRoute,private userService:UsersServicesService) {
+
+  constructor(private param:ActivatedRoute,private userService:UsersServicesService, private toastr: ToastrService) {
     this.param.params.subscribe(query =>{
      this.keyparam=query.id })
    }
@@ -31,6 +33,7 @@ export class SingleUserComponent implements OnInit {
 
   changerole(){
     this.userService.changeRole(this.user,this.keyparam).subscribe();
+    this.toastr.success("Role updated");
 
   }
 
@@ -38,11 +41,5 @@ export class SingleUserComponent implements OnInit {
 data(){
   console.log(this.user)
 }
-/*  getrole(){
-   this.role= this.userService.getrole(this.user.id).subscribe(
-     (data:any) => this.role = data
-   )
-    console.log(this.role)
-  }*/
 
 }

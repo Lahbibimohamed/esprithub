@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { Option } from 'src/app/Entities/options';
 import { OptionsService } from 'src/app/Service/options.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import {ModalDirective} from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-options',
@@ -11,6 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class OptionsComponent implements OnInit {
   options:Option[];
+  @ViewChild('warningModal') public warningModal: ModalDirective;
+
   constructor(private optionsService:OptionsService,private router : Router,private toastr: ToastrService) { }
 
   ngOnInit(): void {
@@ -20,7 +23,7 @@ export class OptionsComponent implements OnInit {
   delete(id:number){
    this.optionsService.delete(id).subscribe()
    this.router.navigate(["/theme/options"]);
-   this.toastr.success("option deleted Successfully");
+   this.toastr.info("option deleted Successfully");
 
 
   }

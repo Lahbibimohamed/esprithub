@@ -16,7 +16,6 @@
                   <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" disabled placeholder="enter phone number" value={{user.phone}}></div>
                   <div class="col-md-12"><label class="labels">Address </label><input type="text" class="form-control"  disabled value={{user.address}}></div>
                   <div class="col-md-12"><label class="labels">gender</label><input type="text" class="form-control"  disabled value={{user.gender}}></div>
-                  <div class="col-md-12"><label class="labels">Education</label><input type="text" class="form-control"  disabled value={{user.aboutMe}}></div>
               </div>
 
           </div>
@@ -27,9 +26,17 @@
               <h4 class="text-right">Role</h4>
           </div>
           <div>
-          <input type="text" class="form-control"
-                [(ngModel)]="user.role"
-                value={{user.role}}></div>
+
+
+                <label class="labels">Role</label>
+                <select [(ngModel)]="user.role" name="Role" id="Role" class="form-control">
+                  <option value="user">user</option>
+                  <option value="teacher">teacher</option>
+
+                </select>
+
+
+              </div>
               <div class="mt-5 text-center"><button class="btn btn-primary profile-button"  (click)="changerole()" type="button">Change Role</button></div>
             </div>
       </div>

@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/Entities/user';
 import {AuthService} from "src/app/Service/auth.service"
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { ToastrService } from 'ngx-toastr';
+import { UsersServicesService } from 'src/app/Service/users-services.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,7 +16,9 @@ export class LoginComponent implements OnInit{
   hidden_div:boolean=true;
   helper = new JwtHelperService();
   decodedToken: any;
-  constructor(private loginUser:AuthService , private router : Router ) {
+  constructor(private loginUser:AuthService , private router : Router,
+    private toastr: ToastrService ,
+    private userservice:UsersServicesService ) {
     this.user = new User();
    }
   ngOnInit() :void {
@@ -22,19 +26,35 @@ export class LoginComponent implements OnInit{
   }
   login(){
     this.loginUser.loginuser(this.user).
-        subscribe(
-          res =>
-          {
-            if(this.loginUser.getRole()=="user not found"){
-              localStorage.removeItem("token")
-              this.hidden_div=false;
-              this.router.navigate(["/login"])}
-            if (this.loginUser.getRole()=="admin"){
-              this.router.navigate(["/dashboard"])}
+    subscribe(
+      res => {
+        if (this.loginUser.getRole() == "user not found") {
+          localStorage.removeItem("token")
+          this.hidden_div = false;
+          this.router.navigate(["/login"])
+        }
+        else{
+          this.userservice.getinformations().subscribe(uss=>{
+            if (uss.enabled==false){
+              this.router.navigate(["/login"])
+              this.toastr.info("Please activate your account");
 
-            if((this.loginUser.getRole()=="user") || (this.loginUser.getRole()=="teacher")){
-              this.router.navigate(["/dashboard"])}
             }
+
+            else {
+              console.log(uss);
+              sessionStorage.setItem("role",uss.role)
+              this.router.navigate(["/question/questions"])
+              this.toastr.info("Welcome Back");
+            }
+          })
+
+          }
+
+
+        }
+
+
 
     )
   }

@@ -29,4 +29,8 @@ export class OptionsService {
     return this.http.post<Option>(this.url+"save/", options);
 
   }
+  CountOption(){
+    return this.http.get(this.url+"countOption");
+
+  }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/Entities/user';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 import {AuthService} from "src/app/Service/auth.service"
 
@@ -10,7 +11,8 @@ import {AuthService} from "src/app/Service/auth.service"
 })
 export class RegisterComponent implements OnInit{
   user:User;
-  constructor(private register:AuthService ,private router : Router) {
+  constructor(private register:AuthService ,private router : Router,
+    private toastr: ToastrService) {
     this.user = new User();
    }
     ngOnInit() :void {
@@ -19,6 +21,8 @@ export class RegisterComponent implements OnInit{
     save(){
       this.register.SaveUser(this.user).subscribe();
       this.router.navigate(["/login"]);
+      this.toastr.success("Please check your email to complete your registration");
+
     }
 
 }

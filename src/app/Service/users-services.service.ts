@@ -29,7 +29,7 @@ export class UsersServicesService {
   }
 
   changeRole(user:User,id:number){
-    return this.http.put(this.url+"/update/"+id,user);
+    return this.http.put(this.url+"/managment/changeRole/"+id,user);
 
   }
   update(user:User,id:number){
@@ -48,9 +48,29 @@ export class UsersServicesService {
     return this.http.get(this.url+"/managment/getrole/"+id);
 
   }
+  //count all users
   countUser(){
     return this.http.get(this.url+"/countUser");
   }
+    //count todays users
+    countUserByDay(){
+      return this.http.get(this.url+"/usersDay");
+    }
+    //count user with ROle User
+    countUserRole(){
+      return this.http.get(this.url+"/getRoleUser");
+    }
+
+    //count user with ROle Teacher
+    countTeacherRole(){
+      return this.http.get(this.url+"/getRoleTeacher");
+    }
+      //count user with ROle Teacher
+      getUserPerMonth(){
+        return this.http.get<number[]>(this.url+"/getUserPerMonth");
+      }
+
+
 
 
 }

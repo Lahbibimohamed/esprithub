@@ -10,6 +10,7 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import {AuthInterceptorInterceptor} from "src/app/interceptors/auth-interceptor.interceptor"
 import { IconModule, IconSetModule, IconSetService } from '@coreui/icons-angular';
 
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
@@ -24,6 +25,7 @@ import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 import { ToastrModule } from 'ngx-toastr';
+import { ChartsModule } from 'ng2-charts';
 
 const APP_CONTAINERS = [
   DefaultLayoutComponent
@@ -43,7 +45,6 @@ import { AppRoutingModule } from './app.routing';
 // Import 3rd party components
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { ChartsModule } from 'ng2-charts';
 import {HttpClientModule , HTTP_INTERCEPTORS} from "@angular/common/http";
 import { FormsModule } from '@angular/forms';
 import { UsersComponent } from './views/users/users.component';
